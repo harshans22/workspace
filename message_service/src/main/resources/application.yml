@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: message_service
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/messaging_db
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: messaging-group
+      auto-offset-reset: earliest
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: '*'
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+server:
+  port: 8082

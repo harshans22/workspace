@@ -1,5 +1,6 @@
 package org.example.user_service.service;
 
+import org.example.user_service.Kafka.UserKafkaProducer;
 import org.example.user_service.model.User;
 import org.example.user_service.model.UserLoginDto;
 import org.example.user_service.model.UserRegisterDto;
@@ -14,6 +15,7 @@ import java.util.Optional;
 public class UserService {
     @Autowired private UserRepository repo;
     @Autowired private SecurityUtil security;
+    @Autowired private UserKafkaProducer kafkaProducer;
 
     public Optional<User> register(UserRegisterDto dto) {
         if (repo.findByEmail(dto.email).isPresent()) return Optional.empty();
@@ -21,7 +23,9 @@ public class UserService {
         user.setUsername(dto.username);
         user.setEmail(dto.email);
         user.setPasswordHash(security.hashPassword(dto.password));
-        return Optional.of(repo.save(user));
+        User saved = repo.save(user);
+        kafkaProducer.sendUserCreated(saved.getUsername());
+        return Optional.of(saved);
     }
 
     public Optional<String> login(UserLoginDto dto) {
