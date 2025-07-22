@@ -1,0 +1,20 @@
+server:
+  port: 8083
+
+spring:
+  application:
+        name: workspace-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/workspaces
+    username: postgres
+    password: pass
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, prometheus, metrics

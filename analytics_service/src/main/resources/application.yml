@@ -1,0 +1,14 @@
+server:
+  port: 8084
+
+spring:
+  application:
+        name: analytics-service
+  kafka:
+    bootstrap-servers: localhost:9092
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus, health, info, metrics
