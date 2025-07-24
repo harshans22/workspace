@@ -21,4 +21,18 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
-
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"                # exposes all actuator endpoints
+  endpoint:
+    health:
+      show-details: always          # show full health info on /actuator/health
+  metrics:
+    tags:
+      application: ${spring.application.name}
+  server:
+    port: 8081                      # exposes management endpoints on same port
+  prometheus:
+    enabled: true                   # enable prometheus metrics exposure

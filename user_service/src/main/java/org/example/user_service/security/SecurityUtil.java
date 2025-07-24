@@ -10,7 +10,7 @@ import java.util.Date;
 @Component
 public class SecurityUtil {
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-    private final String jwtSecret = "your-jwt-signing-key"; // Use env/Keystore in prod!
+    private final String jwtSecret="pLxN68q6xXnJg6z2FGW9CqJVO1XrMJwqDzsOe2cINLFC9bKPXDvRYGfIqzZpYN8mRe6n0tjTwcMwwRUpBjMMxGw=="; // Use env/Keystore in prod!
     private final long jwtExpirationMs = 86400000; // 1 day
 
     public String hashPassword(String raw) {

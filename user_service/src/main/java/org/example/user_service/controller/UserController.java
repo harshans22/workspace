@@ -27,4 +27,5 @@ public class UserController {
             .map(token -> ResponseEntity.ok().body(token))
             .orElse(ResponseEntity.status(401).body("Invalid credentials"));
     }
+
 }
